@@ -10,7 +10,9 @@ Boolean := 'TRUE' | 'FALSE'
 UnaryOperator := 'NOT'
 BinaryOperator := 'AND' | 'OR' | 'XOR' | 'NOR' | 'NAND'
 
-Term := [UnaryOperator] (Boolean | '(' Expression ')')
+Factor := Boolean | '(' Expression ')'
+
+Term := [UnaryOperator] Factor
 
 Expression := Term {BinaryOperator Term}
 ```
