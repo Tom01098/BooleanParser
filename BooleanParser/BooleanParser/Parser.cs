@@ -17,19 +17,49 @@ namespace BooleanParser
         // Expression := Term {BinaryOperator Term}
         public bool? Expression()
         {
-            throw new NotImplementedException();
+            var result = Term();
+            // Loop
+            return result;
         }
 
         // Term := [UnaryOperator] Factor
         public bool? Term()
         {
-            throw new NotImplementedException();
+            tokens.SetBacktrackPoint();
+            bool isNot = false;
+
+            if (tokens.Current == "NOT")
+            {
+                isNot = true;
+                tokens.MoveNext();
+            }
+
+            var factor = Factor();
+
+            if (factor.HasValue)
+            {
+                return isNot
+                    ? !factor.Value
+                    : factor.Value;
+            }
+
+            tokens.Backtrack();
+            return null;
         }
 
         // Factor := Boolean | ParenthesisedExpression
         public bool? Factor()
         {
-            throw new NotImplementedException();
+            tokens.SetBacktrackPoint();
+
+            var result = Boolean() ?? ParenthesisedExpression();
+
+            if (!result.HasValue)
+            {
+                tokens.Backtrack();
+            }
+
+            return result;
         }
 
         // ParenthesisedExpression = '(' Expression ')'
@@ -41,7 +71,18 @@ namespace BooleanParser
         // Boolean := 'TRUE' | 'FALSE'
         public bool? Boolean()
         {
-            throw new NotImplementedException();
+            if (tokens.Current == "TRUE")
+            {
+                return true;
+            }
+            else if (tokens.Current == "FALSE")
+            {
+                return false;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
