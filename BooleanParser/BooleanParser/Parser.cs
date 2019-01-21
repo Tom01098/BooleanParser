@@ -26,8 +26,14 @@ namespace BooleanParser
             throw new NotImplementedException();
         }
 
-        // Factor := Boolean | '(' Expression ')'
+        // Factor := Boolean | ParenthesisedExpression
         public bool? Factor()
+        {
+            throw new NotImplementedException();
+        }
+
+        // ParenthesisedExpression = '(' Expression ')'
+        public bool? ParenthesisedExpression()
         {
             throw new NotImplementedException();
         }
