@@ -27,7 +27,8 @@ namespace BooleanParser
         /// <summary>
         /// The current token
         /// </summary>
-        public string Current => tokens[indexes.Peek()];
+        public string Current => 
+            indexes.Peek() < tokens.Length ? tokens[indexes.Peek()] : null;
 
         /// <summary>
         /// Push the current point onto the stack as a point that can be 

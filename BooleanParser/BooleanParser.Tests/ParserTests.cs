@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace BooleanParser.Tests
 {
@@ -264,42 +263,42 @@ namespace BooleanParser.Tests
 
         #region Invalid
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid()
         {
             new Parser("(").Parse();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid2()
         {
             new Parser("TRUE )").Parse();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid3()
         {
             new Parser("TRUE TRUE").Parse();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid4()
         {
             new Parser("XOR TRUE").Parse();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid5()
         {
             new Parser("NOT AND").Parse();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(UnexpectedTokenException))]
         public void Invalid6()
         {
             new Parser("(TRUE) AND TRUE)").Parse();
