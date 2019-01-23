@@ -10,8 +10,14 @@ namespace BooleanParser
 
         public bool Parse()
         {
-            return Expression()
-                ?? throw tokens.UnexpectedToken();
+            var expression = Expression();
+
+            if (expression is null || !(tokens.Current is null))
+            {
+                throw tokens.UnexpectedToken();
+            }
+
+            return expression.Value;
         }
 
         // Expression := Term {BinaryOperator Term}
@@ -27,33 +33,51 @@ namespace BooleanParser
                 return null;
             }
 
-            // TODO I'm pretty sure this loop has something minor wrong about it, definitely rewrite.
-            while (!(tokens.Current is null))
+            while (true)
+            {
+                tokens.SetBacktrackPoint();
+                var opAndTerm = GetOpAndTerm();
+
+                if (opAndTerm is null)
+                {
+                    tokens.Backtrack();
+                    return result;
+                }
+
+                (string op, bool term) = opAndTerm.Value;
+
+                result = BinaryOperation(result.Value, op, term);
+
+                if (result is null)
+                {
+                    throw tokens.UnexpectedToken();
+                }
+            }
+
+            (string op, bool term)? GetOpAndTerm()
             {
                 tokens.SetBacktrackPoint();
 
                 var op = tokens.Current;
-                tokens.MoveNext();
 
                 if (op is null)
                 {
                     tokens.Backtrack();
-                    return result;
+                    return null;
                 }
 
-                var term = Term();
                 tokens.MoveNext();
+
+                var term = Term();
 
                 if (term is null)
                 {
                     tokens.Backtrack();
-                    return result;
+                    return null;
                 }
 
-                result = BinaryOperation(result.Value, op, term.Value);
+                return (op, term.Value);
             }
-
-            return result;
         }
 
         // Term := [UnaryOperator] Factor
@@ -121,6 +145,8 @@ namespace BooleanParser
                 tokens.Backtrack();
                 return null;
             }
+
+            tokens.MoveNext();
 
             return expression;
         }
