@@ -8,7 +8,7 @@ The EBNF of the parser grammar is as follows.
 Boolean := 'TRUE' | 'FALSE'
 
 UnaryOperator := 'NOT'
-BinaryOperator := 'AND' | 'OR' | 'XOR' | 'NOR' | 'NAND'
+BinaryOperator := 'AND' | 'OR' | 'XOR' | 'NOR' | 'NAND' | 'XNOR'
 
 ParenthesisedExpression = '(' Expression ')'
 

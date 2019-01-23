@@ -21,6 +21,8 @@ namespace BooleanParser
                     return !(lhs || rhs);
                 case "NAND":
                     return !(lhs && rhs);
+                case "XNOR":
+                    return !(lhs ^ rhs);
                 default:
                     return null;
             }

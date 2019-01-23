@@ -211,6 +211,40 @@ namespace BooleanParser.Tests
         }
         #endregion
 
+        #region XNOR
+        [TestMethod]
+        public void Xnor()
+        {
+            bool result = new Parser("TRUE XNOR TRUE").Parse();
+
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void Xnor2()
+        {
+            bool result = new Parser("TRUE XNOR FALSE").Parse();
+
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void Xnor3()
+        {
+            bool result = new Parser("FALSE XNOR TRUE").Parse();
+
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void Xnor4()
+        {
+            bool result = new Parser("FALSE XNOR FALSE").Parse();
+
+            Assert.AreEqual(true, result);
+        }
+        #endregion
+
         #region Multiple
         [TestMethod]
         public void Multiple()
