@@ -19,7 +19,7 @@
         }
 
         // Expression := Term {BinaryOperator Term}
-        public bool? Expression()
+        private bool? Expression()
         {
             var result = TryParseMethod(Term);
 
@@ -70,7 +70,7 @@
         }
 
         // Term := [UnaryOperator] Factor
-        public bool? Term()
+        private bool? Term()
         {
             bool isNot = false;
 
@@ -86,13 +86,13 @@
         }
 
         // Factor := Boolean | ParenthesisedExpression
-        public bool? Factor()
+        private bool? Factor()
         {
             return TryParseMethods(Boolean, ParenthesisedExpression);
         }
 
         // ParenthesisedExpression = '(' Expression ')'
-        public bool? ParenthesisedExpression()
+        private bool? ParenthesisedExpression()
         {
             if (tokens.Current != "(")
             {
@@ -114,7 +114,7 @@
         }
 
         // Boolean := 'TRUE' | 'FALSE'
-        public bool? Boolean()
+        private bool? Boolean()
         {
             if (tokens.Current == "TRUE")
             {
