@@ -1,4 +1,6 @@
-﻿namespace BooleanParser
+﻿using System;
+
+namespace BooleanParser
 {
     public partial class Parser
     {
@@ -22,6 +24,37 @@
                 default:
                     return null;
             }
+        }
+
+        private T? TryParseMethod<T>(Func<T?> parseMethod)
+            where T : struct
+        {
+            tokens.SetBacktrackPoint();
+
+            T? result = parseMethod();
+
+            if (result is null)
+            {
+                tokens.Backtrack();
+            }
+
+            return result;
+        }
+
+        private T? TryParseMethods<T>(params Func<T?>[] parseMethods)
+            where T : struct
+        {
+            foreach (var parseMethod in parseMethods)
+            {
+                T? result = parseMethod();
+
+                if (!(result is null))
+                {
+                    return result;
+                }
+            }
+
+            return null;
         }
     }
 }

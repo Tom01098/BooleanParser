@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BooleanParser
+﻿namespace BooleanParser
 {
     public partial class Parser
     {
@@ -10,7 +8,7 @@ namespace BooleanParser
 
         public bool Parse()
         {
-            var expression = Expression();
+            var expression = TryParseMethod(Expression);
 
             if (expression is null || !(tokens.Current is null))
             {
@@ -23,24 +21,19 @@ namespace BooleanParser
         // Expression := Term {BinaryOperator Term}
         public bool? Expression()
         {
-            tokens.SetBacktrackPoint();
-
-            var result = Term();
+            var result = TryParseMethod(Term);
 
             if (result is null)
             {
-                tokens.Backtrack();
                 return null;
             }
 
             while (true)
             {
-                tokens.SetBacktrackPoint();
-                var opAndTerm = GetOpAndTerm();
+                var opAndTerm = TryParseMethod(GetOpAndTerm);
 
                 if (opAndTerm is null)
                 {
-                    tokens.Backtrack();
                     return result;
                 }
 
@@ -56,23 +49,19 @@ namespace BooleanParser
 
             (string op, bool term)? GetOpAndTerm()
             {
-                tokens.SetBacktrackPoint();
-
                 var op = tokens.Current;
 
                 if (op is null)
                 {
-                    tokens.Backtrack();
                     return null;
                 }
 
                 tokens.MoveNext();
 
-                var term = Term();
+                var term = TryParseMethod(Term);
 
                 if (term is null)
                 {
-                    tokens.Backtrack();
                     return null;
                 }
 
@@ -83,8 +72,6 @@ namespace BooleanParser
         // Term := [UnaryOperator] Factor
         public bool? Term()
         {
-            tokens.SetBacktrackPoint();
-
             bool isNot = false;
 
             if (tokens.Current == "NOT")
@@ -93,12 +80,7 @@ namespace BooleanParser
                 tokens.MoveNext();
             }
 
-            var factor = Factor();
-
-            if (factor is null)
-            {
-                tokens.Backtrack();
-            }
+            var factor = TryParseMethod(Factor);
 
             return isNot ? Not(factor) : factor;
         }
@@ -106,43 +88,23 @@ namespace BooleanParser
         // Factor := Boolean | ParenthesisedExpression
         public bool? Factor()
         {
-            tokens.SetBacktrackPoint();
-
-            var boolean = Boolean();
-
-            if (!(boolean is null))
-            {
-                return boolean;
-            }
-
-            var parenthesisedExpression = ParenthesisedExpression();
-
-            if (parenthesisedExpression is null)
-            {
-                tokens.Backtrack();
-            }
-
-            return parenthesisedExpression;
+            return TryParseMethods(Boolean, ParenthesisedExpression);
         }
 
         // ParenthesisedExpression = '(' Expression ')'
         public bool? ParenthesisedExpression()
         {
-            tokens.SetBacktrackPoint();
-
             if (tokens.Current != "(")
             {
-                tokens.Backtrack();
                 return null;
             }
 
             tokens.MoveNext();
 
-            var expression = Expression();
+            var expression = TryParseMethods(Expression);
 
             if (tokens.Current != ")")
             {
-                tokens.Backtrack();
                 return null;
             }
 
