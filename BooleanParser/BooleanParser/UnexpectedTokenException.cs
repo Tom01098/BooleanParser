@@ -8,7 +8,7 @@ namespace BooleanParser
         public UnexpectedTokenException() { }
 
         public UnexpectedTokenException(string message) 
-            : base(message) { }
+            : base($"Unexpected token: '{message}'") { }
 
         public UnexpectedTokenException(string message, Exception inner) 
             : base(message, inner) { }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanParser", "BooleanParser\BooleanParser.csproj", "{AA6DA99A-6190-46CB-96A1-38D26947DC5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooleanParser", "BooleanParser\BooleanParser.csproj", "{AA6DA99A-6190-46CB-96A1-38D26947DC5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanParser.Tests", "BooleanParser.Tests\BooleanParser.Tests.csproj", "{0955CDC7-A654-4A6B-8A6F-1A19E51D5756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooleanParser.Tests", "BooleanParser.Tests\BooleanParser.Tests.csproj", "{0955CDC7-A654-4A6B-8A6F-1A19E51D5756}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanParser.Interactive", "BooleanParser.Interactive\BooleanParser.Interactive.csproj", "{308F4BEB-BEDB-44B8-BEA6-AA3C7291C8DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0955CDC7-A654-4A6B-8A6F-1A19E51D5756}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0955CDC7-A654-4A6B-8A6F-1A19E51D5756}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0955CDC7-A654-4A6B-8A6F-1A19E51D5756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{308F4BEB-BEDB-44B8-BEA6-AA3C7291C8DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308F4BEB-BEDB-44B8-BEA6-AA3C7291C8DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308F4BEB-BEDB-44B8-BEA6-AA3C7291C8DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308F4BEB-BEDB-44B8-BEA6-AA3C7291C8DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
