@@ -43,7 +43,7 @@
 
                 if (result is null)
                 {
-                    throw tokens.UnexpectedToken();
+                    return null;
                 }
             }
 

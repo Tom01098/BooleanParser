@@ -337,6 +337,13 @@ namespace BooleanParser.Tests
         {
             new Parser("(TRUE) AND TRUE)").Parse();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void Invalid7()
+        {
+            new Parser("TRUE NOT TRUE").Parse();
+        }
         #endregion
     }
 }
