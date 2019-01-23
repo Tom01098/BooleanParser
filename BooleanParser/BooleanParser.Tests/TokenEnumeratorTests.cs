@@ -121,7 +121,7 @@ namespace BooleanParser.Tests
             }
             catch (UnexpectedTokenException e)
             {
-                Assert.AreEqual("X", e.Message);
+                Assert.AreEqual("Unexpected token: 'X'", e.Message);
             }
         }
     }
