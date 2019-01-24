@@ -18,7 +18,7 @@ namespace BooleanParser.Interactive
 
                 try
                 {
-                    bool result = new Parser(input).Parse();
+                    bool result = new Parser(input.ToUpper()).Parse();
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(result);
