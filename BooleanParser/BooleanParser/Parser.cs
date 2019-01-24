@@ -1,11 +1,33 @@
 ﻿namespace BooleanParser
 {
+    /// <summary>
+    /// Parses a given string of input as a boolean expression and produces
+    /// the boolean output of the expression
+    /// </summary>
     public partial class Parser
     {
         private readonly TokenEnumerator tokens;
 
+        /// <summary>
+        /// Construct a parser with a given boolean expression
+        /// </summary>
+        /// 
+        /// <param name="input">
+        /// The boolean expression to parse
+        /// </param>
         public Parser(string input) => tokens = new TokenEnumerator(input);
 
+        /// <summary>
+        /// Parse the boolean expression given on instantiation
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The result of parsing the boolean expression
+        /// </returns>
+        /// 
+        /// <exception cref="UnexpectedTokenException">
+        /// Thrown when a token was unexpected during parsing
+        /// </exception>
         public bool Parse()
         {
             if (tokens.Current is null)
