@@ -344,6 +344,13 @@ namespace BooleanParser.Tests
         {
             new Parser("TRUE NOT TRUE").Parse();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(UnexpectedTokenException))]
+        public void Invalid8()
+        {
+            new Parser("").Parse();
+        }
         #endregion
     }
 }

@@ -8,6 +8,11 @@
 
         public bool Parse()
         {
+            if (tokens.Current is null)
+            {
+                throw new UnexpectedTokenException("<EOF>");
+            }
+
             var expression = TryParseMethod(Expression);
 
             if (expression is null || !(tokens.Current is null))
