@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Authors>Tom01098</Authors>
+    <Company>Tom01098</Company>
+    <Description>A left-to-right boolean expression parser.</Description>
+    <PackageLicenseUrl>https://github.com/Tom01098/BooleanParser/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Tom01098/BooleanParser</PackageProjectUrl>
+    <PackageTags>Boolean, Parser</PackageTags>
   </PropertyGroup>
 
 </Project>
