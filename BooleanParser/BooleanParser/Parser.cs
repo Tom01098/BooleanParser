@@ -118,7 +118,7 @@
             return TryParseMethods(Boolean, ParenthesisedExpression);
         }
 
-        // ParenthesisedExpression = '(' Expression ')'
+        // ParenthesisedExpression := '(' Expression ')'
         private bool? ParenthesisedExpression()
         {
             if (tokens.Current != "(")

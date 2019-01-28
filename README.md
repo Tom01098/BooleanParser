@@ -12,7 +12,7 @@ Boolean := 'TRUE' | 'FALSE'
 UnaryOperator := 'NOT'
 BinaryOperator := 'AND' | 'OR' | 'XOR' | 'NOR' | 'NAND' | 'XNOR'
 
-ParenthesisedExpression = '(' Expression ')'
+ParenthesisedExpression := '(' Expression ')'
 
 Factor := Boolean | ParenthesisedExpression
 
