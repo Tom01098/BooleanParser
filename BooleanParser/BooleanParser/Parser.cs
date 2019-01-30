@@ -35,7 +35,7 @@
                 throw new UnexpectedTokenException("<EOF>");
             }
 
-            var expression = TryParseMethod(Expression);
+            var expression = ParseWith(Expression);
 
             if (expression is null || !(tokens.Current is null))
             {
@@ -48,7 +48,7 @@
         // Expression := Term {BinaryOperator Term}
         private bool? Expression()
         {
-            var result = TryParseMethod(Term);
+            var result = ParseWith(Term);
 
             if (result is null)
             {
@@ -57,7 +57,7 @@
 
             while (true)
             {
-                var opAndTerm = TryParseMethod(GetOpAndTerm);
+                var opAndTerm = ParseWith(GetOpAndTerm);
 
                 if (opAndTerm is null)
                 {
@@ -85,7 +85,7 @@
 
                 tokens.MoveNext();
 
-                var term = TryParseMethod(Term);
+                var term = ParseWith(Term);
 
                 if (term is null)
                 {
@@ -107,7 +107,7 @@
                 tokens.MoveNext();
             }
 
-            var factor = TryParseMethod(Factor);
+            var factor = ParseWith(Factor);
 
             return isNot ? Not(factor) : factor;
         }
@@ -115,7 +115,7 @@
         // Factor := Boolean | ParenthesisedExpression
         private bool? Factor()
         {
-            return TryParseMethods(Boolean, ParenthesisedExpression);
+            return ParseWith(Boolean, ParenthesisedExpression);
         }
 
         // ParenthesisedExpression := '(' Expression ')'
@@ -128,7 +128,7 @@
 
             tokens.MoveNext();
 
-            var expression = TryParseMethods(Expression);
+            var expression = ParseWith(Expression);
 
             if (tokens.Current != ")")
             {

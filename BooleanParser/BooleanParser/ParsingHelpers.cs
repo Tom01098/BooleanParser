@@ -28,29 +28,20 @@ namespace BooleanParser
             }
         }
 
-        private T? TryParseMethod<T>(Func<T?> parseMethod)
-            where T : struct
-        {
-            tokens.SetBacktrackPoint();
-
-            T? result = parseMethod();
-
-            if (result is null)
-            {
-                tokens.Backtrack();
-            }
-
-            return result;
-        }
-
-        private T? TryParseMethods<T>(params Func<T?>[] parseMethods)
+        private T? ParseWith<T>(params Func<T?>[] parseMethods)
             where T : struct
         {
             foreach (var parseMethod in parseMethods)
             {
+                tokens.SetBacktrackPoint();
+
                 T? result = parseMethod();
 
-                if (!(result is null))
+                if (result is null)
+                {
+                    tokens.Backtrack();
+                }
+                else
                 {
                     return result;
                 }
