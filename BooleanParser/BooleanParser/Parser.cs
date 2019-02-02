@@ -143,15 +143,10 @@
         // Boolean := 'TRUE' | 'FALSE'
         private bool? Boolean()
         {
-            if (tokens.Current == "TRUE")
+            if (bool.TryParse(tokens.Current, out bool value))
             {
                 tokens.MoveNext();
-                return true;
-            }
-            else if (tokens.Current == "FALSE")
-            {
-                tokens.MoveNext();
-                return false;
+                return value;
             }
             else
             {
